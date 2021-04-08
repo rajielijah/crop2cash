@@ -1,10 +1,8 @@
 # crop2cash
 The goal of this project is to provide a buyer and seller a platform where they can buy and sell Items.
-Sellers signup to the website,then they can post their various Items, they add image, title and description of the items they are trying to sell so the buyer can view it,
+Sellers signup to the website,then they can post their various Items, they add image, title and description of the items they are trying to sell so the buyer can view it and show interest in it. 
 
 Main Features
-
-Django 3.0+
 
 Development, Staging and Production settings with django-configurations.
 
