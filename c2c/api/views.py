@@ -16,7 +16,7 @@ class IsJWTAuthenticated(permissions.BasePermission):
     message = {"error": "You are unauthorized to access this resource"}
     
     def has_permission(self, request, view):
-        token = request.META['HTTP_AUTHORIZATION'].split()[1]
+        # token = request.META['HTTP_AUTHORIZATION'].split()[1]
         try:
             decoded = jwt.decode(token, 'MySecretKey', algorithms='HS256')
         except:

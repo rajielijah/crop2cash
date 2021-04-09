@@ -15,6 +15,7 @@ from six.moves.urllib import request
 from cryptography.x509 import load_pem_x509_certificate
 from cryptography.hazmat.backends import default_backend
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -46,6 +47,7 @@ INSTALLED_APPS = [
     'c2c',
     'knox',
     'corsheaders',
+    'rest_framework_swagger',
     'rest_framework.authtoken'
 ]
 
@@ -53,6 +55,7 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.AllowAny',
     ),
+    'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10,
     'DEFAULT_AUTHENTICATION_CLASSES': (
@@ -93,6 +96,27 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'crop2cash.wsgi.application'
+
+SWAGGER_SETTINGS = {
+    "exclude_namespaces": ['rest_logout', ],  # List URL namespaces to ignore
+    "SUPPORTED_SUBMIT_METHODS": [  # Specify which methods to enable in Swagger UI
+        'get',
+        'post',
+        'put',
+        'delete'
+    ],
+    'SECURITY_DEFINITIONS': {
+        'api_key': {
+            'type': 'apiKey',
+            'in': 'header',
+            'name': 'Authorization'
+        }
+    },
+    'USE_SESSION_AUTH': True,
+    'JSON_EDITOR': True,
+    'REFETCH_SCHEMA_ON_LOGOUT': True
+
+}
 
 
 # Database
@@ -143,6 +167,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
 
 AUTH0_DOMAIN = 'dev-8uyyxk3b.us.auth0.com'
